@@ -4,7 +4,7 @@
 (ql:quickload "osicat")
 
 ;; Cache file name
-(defconstant cache-file "stonks.cache")
+(defconstant cache-file "~/.stonks.cache")
 (defconstant day-names
     '("Monday" "Tuesday" "Wednesday"
       "Thursday" "Friday" "Saturday"
@@ -42,7 +42,7 @@
 	  (parse-integer (read-line stream nil)))
 		(declare (ignore dst-p))
 		(format nil "Cache Date: ~2,'0d:~2,'0d:~2,'0d on ~a, ~d/~2,'0d/~d (GMT~@d)"
-			hour minute second (nth day-of-week day-names) month date year (- tz))))
+			hour minute second (nth day-of-week day-names) date month year (- tz))))
 
 	;; Get everything else after the first line
 	;; which should be stock information.
@@ -53,7 +53,6 @@
 		       )
 	    
 		   )
-	     (setf (gethash "STAT" cache-hash-table) (osicat-posix:stat cache-file))
     )
     cache-hash-table))
 
